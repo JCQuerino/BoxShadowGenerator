@@ -1,0 +1,99 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.container{
+    max-width: 1100px;
+    width: 100%;
+    margin: 0 auto;
+}
+.flex{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 50px;
+}
+.ranges{
+    width: 100%;
+    background-color: rgb(240, 240, 240);
+    border: 1px solid;
+    border-radius: 4px;
+    padding: 20px;
+}
+.boxShadow{
+    width: 49%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+h1{
+    text-align: center;
+    margin-top: 20px;
+}
+.box{
+    width: 45%;
+    height: 200px;
+    margin-top: 50px;
+    border: 1px solid;
+    background-color: rgb(230, 230, 230);
+}
+input[type=range]{
+    width: 100%;
+}
+.inputwrapper:not(:first-child){
+    margin-top: 10px;
+}
+.wrapper-ranges{
+    display: flex;
+    flex-direction: column;
+    width: 49%;
+}
+.nameBoxShadow{
+    width: 100%;
+    background-color: rgb(240, 240, 240);
+    border: 1px solid;
+    border-radius: 4px;
+    padding: 10px;
+    margin-top: 20px;
+}
+.corBox{
+    margin-top: 20px;
+    display: none;
+}
+.comandoBoxShadow{
+    width: 100%;
+    background-color: rgb(240, 240, 240);
+    border: 1px solid;
+    border-radius: 4px;
+    padding: 20px;
+    margin-top: 20px;
+}
+.comando{
+    padding: 15px;
+    background-color: white;
+    border: 1px solid;
+    border-radius: 4px;
+}
+.avisoCopiado{
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    height: auto;
+    padding: 12px;
+    border-radius: 4px;
+    background-color: purple;
+    color: white;
+    display: none;
+}
+#execCopy{
+    padding: 4px;
+    background-color: purple;
+    color: white;
+    border: none;
+    border: 1px solid;
+    border-radius: 4px;
+    cursor: pointer;
+}

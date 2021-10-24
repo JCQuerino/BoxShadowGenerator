@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Júlio César">
+    <meta name="description" content="Gerador de Box Shadow">
+    <meta name="keywords" content="gerador, gerar box, box, shadow">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerador de Box Shadow</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Gerador de Box Shadow</h1>
+    <div class="container flex">
+        <div class="wrapper-ranges">
+            <div class="ranges">
+                <div class="inputwrapper">
+                    <span>Shift right: </span>
+                    <input id="right" type="range" min="-50" max="50">
+                    <span id="valorRight"></span>
+                </div>
+                <div class="inputwrapper">
+                    <span>Shift down: </span>
+                    <input id="down" type="range" min="-50" max="50">
+                    <span id="valorDown"></span>
+                </div>
+                <div class="inputwrapper">
+                    <span>Spread: </span>
+                    <input id="spread" type="range" min="-30" max="50">
+                    <span id="valorSpread"></span>
+                </div>
+                <div class="inputwrapper">
+                    <span>Blur: </span>
+                    <input id="blur" type="range" min="0" max="50">
+                    <span id="valorBlur"></span>
+                </div>
+                <div class="inputwrapper">
+                    <span>Color </span>
+                    <input id="color" type="color" min="0" max="50">
+                    <span id="valorCor"></span>
+                </div>
+            </div>
+            <div class="nameBoxShadow">
+                <span id="valorBoxShadow"></span>
+            </div>
+            <div class="comandoBoxShadow">
+                <div class="comando">
+                    <span id="conteudoComando"></span>
+                    <span><button id="execCopy">Copiar</button></span>
+                </div>
+            </div>
+        </div>
+        <div class="boxShadow">
+            <div class="fundo">
+                <input type="checkbox" id="fundoBox">
+                <span>Mudar o fundo da box</span>
+            </div>
+            <div class="corBox">
+                <span>Cor da Box</span>
+                <input type="color" id="colorBox">
+            </div>
+            <div class="box"></div>
+        </div>
+    </div>
+    <div class="avisoCopiado">
+        <span>Copiado para a área de tranferência</span>
+    </div>
+
+    <script>
+        var valorBoxShadow = document.querySelector('#valorBoxShadow');
+        valorBoxShadow.innerHTML = `0px 0px 25px 10px #00000`;
+        var valorRight = document.querySelector('#valorRight')
+        var range = document.querySelectorAll('input[type=range],input[type=color]');
+        var box = document.querySelector('.box');
+        var colorBox = document.querySelector('#colorBox');
+        var openColorBox = document.querySelector('.corBox');
+        var boxComando = document.querySelector('.comando');
+        var conteudoComando = document.querySelector('#conteudoComando');
+        var avisocopiado = document.querySelector('.avisoCopiado');
+
+        document.querySelector('#execCopy').addEventListener('click',()=>{      
+            setTimeout(function() {
+                avisocopiado.style.display = 'block';
+                setTimeout(function() {
+                    avisocopiado.style.display = 'none';
+                },4000)
+            },100)
+            let text = conteudoComando.innerHTML;    
+            navigator.clipboard.writeText(text); 
+        });
+
+        conteudoComando.innerHTML = `
+            box-shadow: 0px 0px 25px 10px #00000;
+        `
+
+        colorBox.addEventListener('input',()=>{
+            var changedColor = colorBox.value;
+            box.style.backgroundColor = changedColor;
+        })
+
+        function fundoBox() {
+            if(check.checked == true){
+                openColorBox.style.display = 'block';
+            }else{
+                openColorBox.style.display = 'none';
+                box.style.backgroundColor = 'rgb(230, 230, 230)';
+            }
+        }
+        
+        var check = document.querySelector('#fundoBox');
+        check.addEventListener('click',()=>{
+            fundoBox();
+        })
+
+        document.querySelector('#valorRight').innerHTML = `0`;
+        document.querySelector('#valorDown').innerHTML = `0`;
+        document.querySelector('#valorSpread').innerHTML = `10`;
+        document.querySelector('#valorBlur').innerHTML = `25`;
+
+        var valorCor = document.querySelector('#valorCor');
+        valorCor.innerHTML = '#000000';
+
+        box.style.boxShadow = `0 0 25px 10px`;
+        boxComando.style.boxShadow = `0 0 25px 10px`;
+
+        var valorRanges = [];
+
+        for(var i = 0; i < range.length;i++){
+            range[i].addEventListener('input',()=>{
+                valorRanges = {
+                    right: range[0].value,
+                    down: range[1].value,
+                    spread: range[2].value,
+                    blur: range[3].value,
+                    cor: range[4].value,
+                }
+                document.querySelector('#valorRight').innerHTML = `${valorRanges.right}`;
+                document.querySelector('#valorDown').innerHTML = `${valorRanges.down}`;
+                document.querySelector('#valorSpread').innerHTML = `${valorRanges.spread}`;
+                document.querySelector('#valorBlur').innerHTML = `${valorRanges.blur}`;
+
+                valorCor.innerHTML = `${valorRanges.cor}`;
+                boxComando.style.boxShadow = `${valorRanges.right}px ${valorRanges.down}px ${valorRanges.blur}px ${valorRanges.spread}px ${valorRanges.cor}`
+                box.style.boxShadow = (`${valorRanges.right}px ${valorRanges.down}px ${valorRanges.blur}px ${valorRanges.spread}px ${valorRanges.cor}` );
+                valorBoxShadow.innerHTML = `${valorRanges.right}px ${valorRanges.down}px ${valorRanges.blur}px ${valorRanges.spread}px ${valorRanges.cor}`;
+                conteudoComando.innerHTML = `box-shadow: ${valorRanges.right}px ${valorRanges.down}px ${valorRanges.blur}px ${valorRanges.spread}px ${valorRanges.cor};`;
+            })
+        }
+    </script>
+</body>
+</html>
